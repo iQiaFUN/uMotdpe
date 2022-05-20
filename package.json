@@ -1,11 +1,19 @@
 {
   "name": "umotdpe",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "Motd Minecraft servers",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "iQiaFUN",
-  "license": "ISC"
+  "license": "AGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iQiaFUN/uMotdpe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iQiaFUN/uMotdpe/issues"
+  },
+  "homepage": "https://github.com/iQiaFUN/uMotdpe#readme"
 }

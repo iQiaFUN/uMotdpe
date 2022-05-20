@@ -1,0 +1,4 @@
+{
+    "cmd":"/motdpe",
+    "motd_api":"https://api.iqia.fun/motd/?"
+}

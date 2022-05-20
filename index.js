@@ -1,6 +1,8 @@
 const request = require("sync-request");
-const motd_api = 'https://api.iqia.fun/motd/?';
-const cmd = '/motdpe';
+const path = require('path');
+const cfg = JSON.parse(NIL.IO.readFrom(path.join(__dirname, 'config.json')));
+const cmd = cfg.cmd;
+const motd_api = cfg.motd_api;
 
 function getText(e) {
     var rt = '';
@@ -27,7 +29,7 @@ function motd(u){
                     `描述文本：${data.motd}\n`,
                     `在线人数：${data.online}/${data.max}\n`,
                     `网络延迟：${data.delay}ms`,
-					`API 由 iQiaFUN 提供`
+					`API 由 api.iqia.fun 提供`
                 ]
             }else{
                 return '服务器离线';
@@ -37,30 +39,26 @@ function motd(u){
         }
 }
 
-function onStart(api){
-    api.listen('onMainMessageReceived',(e)=>{
-		let text = getText(e);
-		let pt = text.split(' ');
-		if(pt[0]==cmd){
-			switch(pt.length){
-				case 2:
-					var u_api = `${motd_api}ip=${pt[1]}&port=19132`;
-					break;
-				case 3:
-					var u_api = `${motd_api}ip=${pt[1]}&port=${pt[2]}`;
-					break;
-			}
-			let str = motd(u_api);
-			e.reply(str);
-		}
-	});
+class Motdpe extends NIL.ModuleBase{
+    onStart(api){
+        api.listen('onMainMessageReceived',(e)=>{
+            let text = getText(e);
+            let pt = text.split(' ');
+            if(pt[0]==cmd){
+                switch(pt.length){
+                    case 2:
+                        var u_api = `${motd_api}ip=${pt[1]}&port=19132`;
+                        break;
+                    case 3:
+                        var u_api = `${motd_api}ip=${pt[1]}&port=${pt[2]}`;
+                        break;
+                }
+                let str = motd(u_api);
+                e.reply(str);
+            }
+        });
+    }
+    onStop(){}    
 }
 
-
-function onStop(){
-}
-
-module.exports = {
-    onStart,
-    onStop
-};
+module.exports = new Motdpe;
