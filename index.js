@@ -37,7 +37,7 @@ function motd(u){
 					`游戏模式：${data.gamemode}\n`,
                     `描述文本：${data.motd}\n`,
                     `在线人数：${data.online}/${data.max}\n`,
-                    `网络延迟：${data.delay}ms\n`,
+                    `网络延迟：${data.delay}ms\n\n`,
 					`API 由 api.iqia.fun 提供`
                 ]
             }else{
